@@ -29,7 +29,7 @@ class FormValidator {
   }
 
   _hasInvalidInput() {
-    return this.inputList.some((inputElement) => !inputElement.validity.valid);
+    return this._inputList.some((inputElement) => !inputElement.validity.valid);
   }
 
   //Todo-Implement all the other methods
