@@ -1,17 +1,26 @@
 class Todo {
-  constructor(data, selector) {
+  constructor(data, selector, handleCheck, handleDelete) {
+    this._completed = data.completed;
+    this._name = data.name;
+    this._date = data.date;
+    this._id = data.id;
     this._data = data;
-    this._templateElement = document.querySelector(selector);
+    this._selector = selector;
+    this._handleCheck = handleCheck;
+    this._handleDelete = handleDelete;
   }
 
   _setEventListeners() {
-    // sets up delete button handler
-    this.todoDeleteBtn.addEventListener("click", () => {
-      this._todoElement.remove();
-      // sets change listener on checkbox el
-      this._todoCheckboxEl.addEventListener("change", () => {
-        this._data.completed = !this._data.completed;
-      });
+    //sets up delete button handler
+    this._todoDeleteBtn.addEventListener("click", () => {
+      this._handleDelete(this._completed);
+      this._remove();
+    });
+
+    this._todoCheckboxEl.addEventListener("change", () => {
+      //sets change listener on checkbox el
+      this._toggleCompletion();
+      this._handleCheck(this._completed);
     });
   }
   /*
@@ -30,6 +39,16 @@ Data that needs to be shared between different methods in the class
     this._todoCheckboxEl.id = `todo-${this._data.id}`;
     this._todoLabel.setAttribute("for", `todo-${this._data.id}`);
   }
+
+  _toggleCompletion = () => {
+    this._completed = !this._completed;
+  };
+
+  _remove = () => {
+    this._element.remove();
+
+    this._element = null;
+  };
 
   getView() {
     this._todoElement = this._templateElement.content
