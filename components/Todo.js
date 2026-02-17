@@ -8,6 +8,7 @@ class Todo {
     this._selector = selector;
     this._handleCheck = handleCheck;
     this._handleDelete = handleDelete;
+    this._templateElement = document.querySelector(this._selector);
   }
 
   _setEventListeners() {
@@ -45,9 +46,9 @@ Data that needs to be shared between different methods in the class
   };
 
   _remove = () => {
-    this._element.remove();
+    this._todoElement.remove();
 
-    this._element = null;
+    this._todoElement = null;
   };
 
   getView() {
@@ -55,15 +56,15 @@ Data that needs to be shared between different methods in the class
       .querySelector(".todo")
       .cloneNode(true);
 
-    const todoNameEl = this._todoElement.querySelector(".todo__name");
-    const todoDate = this._todoElement.querySelector(".todo__date");
-    this.todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
+    this._todoNameEl = this._todoElement.querySelector(".todo__name");
+    this._todoDate = this._todoElement.querySelector(".todo__date");
+    this._todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
 
-    todoNameEl.textContent = this._data.name;
+    this._todoNameEl.textContent = this._data.name;
     //implements dates
     if (this._data.date) {
       const date = new Date(this._data.date);
-      todoDate.textContent = `Due: ${date.toLocaleDateString("en-US", {
+      this._todoDate.textContent = `Due: ${date.toLocaleDateString("en-US", {
         year: "numeric",
         month: "short",
         day: "numeric",
