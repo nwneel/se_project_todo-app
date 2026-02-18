@@ -46,6 +46,7 @@ Data that needs to be shared between different methods in the class
   };
 
   _remove = () => {
+    //Tells the browser to completely take that HTML element out of the webpage - it disappears from what the user sees
     this._todoElement.remove();
 
     this._todoElement = null;
