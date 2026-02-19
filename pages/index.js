@@ -31,8 +31,7 @@ const handleFormSubmit = (inputValues) => {
 
   todoCounter.updateTotal(true);
 
-  //newTodoValidator.resetValidation();
-  addTodoPopup.close();
+  addTodoPopup.reset();
 };
 
 const addTodoPopup = new PopupWithForm({
