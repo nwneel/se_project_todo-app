@@ -4,13 +4,13 @@ class Popup {
     this._popupCloseBtn = this._popupElement.querySelector(".popup__close");
   }
 
-  _handleEscapeClose(evt) {
+  _handleEscapeClose = (evt) => {
     console.log("some key was pressed");
     if (evt.key === "Escape") {
       //Calls the close method
       this.close();
     }
-  }
+  };
 
   open() {
     this._popupElement.classList.add("popup_visible");
