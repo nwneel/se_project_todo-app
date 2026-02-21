@@ -15,8 +15,11 @@ const handleFormSubmit = (inputValues) => {
   const name = inputValues.name;
   const dateInput = inputValues.date;
 
-  const date = new Date(dateInput);
-  date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+  let date = null;
+  if (dateInput) {
+    date = new Date(dateInput);
+    date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+  }
 
   const id = uuidv4();
 
@@ -31,7 +34,7 @@ const handleFormSubmit = (inputValues) => {
 
   todoCounter.updateTotal(true);
 
-  addTodoPopup.close();
+  addTodoPopup.getFormElements().reset();
 };
 
 const addTodoPopup = new PopupWithForm({
